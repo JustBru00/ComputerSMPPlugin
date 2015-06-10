@@ -2,10 +2,12 @@ package com.gmail.justbru00.computersmp.custom.enchants.gui.main;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,8 +18,9 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseG
 
 public class Main extends JavaPlugin {
 
-	public String Prefix = color("&8[&bEpic&fCustomEnchantsGUI&8]");
+	public String Prefix = color("&8[&bEpic&fCustomEnchantsGUI&8] &f");
 	public FileConfiguration config = getConfig();	
+	public ConsoleCommandSender console = Bukkit.getConsoleSender();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
@@ -92,11 +95,12 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-
+		console.sendMessage(Prefix + "DISABLED!");
 	}
 
 	@Override
 	public void onEnable() {
+		console.sendMessage(Prefix + "ENABLED!");
 
 	}
 
