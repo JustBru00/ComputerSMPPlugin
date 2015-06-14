@@ -19,6 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseGUI;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
+import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.joinWatcher;
 
 public class Main extends JavaPlugin {
 
@@ -111,6 +112,7 @@ public class Main extends JavaPlugin {
             return;
         }
 		getServer().getPluginManager().registerEvents(new GUIWatcher(), this);
+		getServer().getPluginManager().registerEvents(new joinWatcher(), this);
 		console.sendMessage(Prefix + "ENABLED!");
 
 	}
