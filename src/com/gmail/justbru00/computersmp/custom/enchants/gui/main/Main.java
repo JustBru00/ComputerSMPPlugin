@@ -2,6 +2,8 @@ package com.gmail.justbru00.computersmp.custom.enchants.gui.main;
 
 import java.util.ArrayList;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,21 +14,24 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseGUI;
+import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
 
 public class Main extends JavaPlugin {
 
-	public String Prefix = color("&8[&bEpic&fCustomEnchantsGUI&8] &f");
+	public String Prefix = color("&8[&bCommandPurchaseGUI&8] &f");
 	public FileConfiguration config = getConfig();	
 	public ConsoleCommandSender console = Bukkit.getConsoleSender();
+	public static Economy econ = null;
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 
-		if (command.getName().equalsIgnoreCase("customenchantsgui")) {
-			if (sender.hasPermission("customenchantsgui.customenchantsgui")) {				
+		if (command.getName().equalsIgnoreCase("commandpurchasegui")) {
+			if (sender.hasPermission("commandpurchasegui.commandpurchasegui")) {				
 				if (args.length == 1) {
 					if(args[0].equalsIgnoreCase("version")) {
 						sender.sendMessage(Prefix + color("&fVersion Message Here."));
@@ -36,12 +41,12 @@ public class Main extends JavaPlugin {
 						sender.sendMessage(Prefix + color("&fHelp Message Here."));
 						return true;
 					}else {
-						sender.sendMessage(Prefix + color("&4Please put help or version after /customenchantsgui"));
+						sender.sendMessage(Prefix + color("&4Please put help or version after /commandpurchasegui"));
 						return true;
 					}
 					
 				} else {
-				sender.sendMessage(Prefix + color("&4Please put help or version after /customenchantsgui"));
+				sender.sendMessage(Prefix + color("&4Please put help or version after /commandpurchasegui"));
 				return true;
 				}
 			} else {
@@ -52,9 +57,9 @@ public class Main extends JavaPlugin {
 		if (command.getName().equalsIgnoreCase("buycommand")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
-				int money = 100;
-				
-				if (money < 99999) {
+				double money = 100;
+				money = econ.getBalance(player);
+				if (money <= 99999) {
 					player.openInventory(CommandPurchaseGUI.commandPurchaseGUI(player, money));
 					return true;
 				} else {
@@ -100,8 +105,25 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+        if (!setupEconomy() ) {
+            console.sendMessage(color(String.format("%s &cDisabled due to Vault NOT FOUND!", Prefix)));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+		getServer().getPluginManager().registerEvents(new GUIWatcher(), this);
 		console.sendMessage(Prefix + "ENABLED!");
 
 	}
 
+	private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
 }

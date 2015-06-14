@@ -1,0 +1,8 @@
+tpa - 2000, tp - 3500, tpahere - 2100, tpall - 4500, msg - 500, fix - 7500,
+back - 7000, bc - 1500, ci - 1500, craft - 5000, day - 3000, night - 3000,
+weather - 3500, feed - 7500, echest - 2000, fly - 8000, flyspeed - 2000,
+hat - 2000, invsee - 4000, heal - 6500, lightning - 4500, nick - 3000
+
+
+Spawnpoint (minecraft.command.spawnpoint) - 2000
+Teleport bukkit.command.teleport

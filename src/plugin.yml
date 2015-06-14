@@ -1,12 +1,12 @@
-name: CustomEnchantsGUI
+name: CommandPurchaseGUI
 main: com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main
 version: 1.0-SNAPSHOT
-description: ComputerSMPServerPlugin
+description: A Plugin
 author: Justin Brubaker
-softdepend: [Vault]
+depend: [Vault]
 
 commands:
- customenchantsgui:
+ commandpurchasegui:
        description: I am too lazy for this description.     
  buycommand:
        description: I am too lazy for this description.

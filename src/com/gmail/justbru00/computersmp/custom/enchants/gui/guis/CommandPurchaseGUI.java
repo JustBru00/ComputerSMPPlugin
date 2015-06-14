@@ -8,73 +8,81 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
 public class CommandPurchaseGUI {
 
-	public static Inventory commandPurchaseGUI(Player player, int money) {
-		Inventory inv = Bukkit.createInventory(null, 54, Main.color("&cMoney $" + money + "."));
+	public static Inventory commandPurchaseGUI(Player player, double money) {
+		if (!player.isOp()) {
+		    Inventory inv = Bukkit.createInventory(null, 54, Main.color("&bYou are OP."));
+		    inv.setItem(22, Main.createPaperItem("&4You are OP", "Why do you need to buy commands.", "Just Why?"));
+		    return inv;
+		} else {
+			Inventory inv = Bukkit.createInventory(null, 54, Main.color("&cMoney $" + money + "."));
+		
 		
 		if (!player.hasPermission("essentials.tpa")) {
-			inv.addItem(Main.createPaperItem("&b/tpa", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/tpa", "Left Click to purchase.", "&fCost: 2000"));
 		}
 		if (!player.hasPermission("essentials.tp")) {
-			inv.addItem(Main.createPaperItem("&b/tp", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/tp", "Left Click to purchase.", "&fCost: 3500"));
 		}
 		if (!player.hasPermission("essentials.tpahere")) {
-			inv.addItem(Main.createPaperItem("&b/tphere", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/tphere", "Left Click to purchase.", "&fCost: 2100"));
 		}
 		if (!player.hasPermission("essentials.tpall")) {
-			inv.addItem(Main.createPaperItem("&b/tpall", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/tpall", "Left Click to purchase.", "&fCost: 4500"));
 		}
 		if (!player.hasPermission("essentials.msg")) {
-			inv.addItem(Main.createPaperItem("&b/msg", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/msg", "Left Click to purchase.", "&fCost: 500"));
 		}
 		if (!player.hasPermission("essentials.repair")) {
-			inv.addItem(Main.createPaperItem("&b/repair", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/repair", "Left Click to purchase.", "&fCost: 7500"));
 		}
 		if (!player.hasPermission("essentials.back")) {
-			inv.addItem(Main.createPaperItem("&b/back", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/back", "Left Click to purchase.", "&fCost: 7000"));
 		}
 		if (!player.hasPermission("essentials.broadcast")) {
-			inv.addItem(Main.createPaperItem("&b/broadcast", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/broadcast", "Left Click to purchase.", "&fCost: 1500"));
 		}
 		if (!player.hasPermission("essentials.clearinventory")) {
-			inv.addItem(Main.createPaperItem("&b/clearinventory", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/clearinventory", "Left Click to purchase.", "&fCost: 1500"));
 		}
 		if (!player.hasPermission("essentials.workbench")) {
-			inv.addItem(Main.createPaperItem("&b/workbench", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/workbench", "Left Click to purchase.", "&fCost: 5000"));
 		}
 		if (!player.hasPermission("essentials.day")) {
-			inv.addItem(Main.createPaperItem("&b/day", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/day", "Left Click to purchase.", "&fCost: 3000"));
 		}
 		if (!player.hasPermission("essentials.night")) {
-			inv.addItem(Main.createPaperItem("&b/night", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/night", "Left Click to purchase.", "&fCost: 3000"));
 		}
 		if (!player.hasPermission("essentials.weather")) {
-			inv.addItem(Main.createPaperItem("&b/weather", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/weather", "Left Click to purchase.", "&fCost: 3500"));
 		}
 		if (!player.hasPermission("essentials.feed")) {
-			inv.addItem(Main.createPaperItem("&b/feed", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/feed", "Left Click to purchase.", "&fCost: 7500"));
 		}
 		if (!player.hasPermission("essentials.enderchest")) {
-			inv.addItem(Main.createPaperItem("&b/enderchest", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/enderchest", "Left Click to purchase.", "&fCost: 2000"));
 		}
 		if (!player.hasPermission("essentials.fly")) {
-			inv.addItem(Main.createPaperItem("&b/fly", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/fly", "Left Click to purchase.", "&fCost: 8000"));
 		}
 		if (!player.hasPermission("essentials.hat")) {
-			inv.addItem(Main.createPaperItem("&b/hat", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/hat", "Left Click to purchase.", "&fCost: 2000"));
 		}
 		if (!player.hasPermission("essentials.invsee")) {
-			inv.addItem(Main.createPaperItem("&b/invsee", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/invsee", "Left Click to purchase.", "&fCost: 4000"));
 		}
 		if (!player.hasPermission("essentials.heal")) {
-			inv.addItem(Main.createPaperItem("&b/heal", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/heal", "Left Click to purchase.", "&fCost: 6500"));
 		}
 		if (!player.hasPermission("essentials.lightning")) {
-			inv.addItem(Main.createPaperItem("&b/lightning", "Left Click to purchase.", "&fCost: ?"));
+			inv.addItem(Main.createPaperItem("&b/lightning", "Left Click to purchase.", "&fCost: 4500"));
 		}
+		
 		
 		
 		
 		return inv;
+		}
 	}
 	
 }
