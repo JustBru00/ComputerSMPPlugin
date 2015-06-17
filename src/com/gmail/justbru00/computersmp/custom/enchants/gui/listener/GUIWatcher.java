@@ -1,14 +1,21 @@
 package com.gmail.justbru00.computersmp.custom.enchants.gui.listener;
 
+import java.util.ArrayList;
+
 import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.PlayerInventory;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
@@ -16,6 +23,40 @@ public class GUIWatcher implements Listener{
 	
 	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 	String Prefix = Main.color("&8[&bCommandPurchaseGUI&8] &f");
+	
+	@EventHandler
+    public void onPlayerInteract(PlayerInteractEvent e){
+        Player player = e.getPlayer();
+            if(e.getAction() == Action.RIGHT_CLICK_AIR){
+                if(player.getItemInHand().getType() == Material.PAPER){
+                	
+                	ArrayList<String> testlore = new ArrayList<String>();
+                	testlore.add(Main.color("&7Right Click in the air to deposit this."));
+                	testlore.add(Main.color("&8[&bComputerSMP&8]"));
+                	
+                	if (player.getItemInHand().getItemMeta().getLore().equals(testlore)) {
+                		double depositamount = 0.0;
+                		String plainMoney = player.getItemInHand().getItemMeta().getDisplayName().replace(Main.color("&4&l$"), " ");
+                		ChatColor.stripColor(plainMoney);
+                		depositamount = Double.parseDouble(plainMoney);
+                		EconomyResponse r = Main.econ.depositPlayer(player, depositamount);
+    		            if(r.transactionSuccess()) {
+    		                player.sendMessage(String.format(Prefix + "Deposited %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance)));   		               		                
+    		            } else {
+    		            	player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));    		             
+    		            }			
+                	}
+                }  
+            }  
+    }
+	
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent e) {
+	 if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {
+		 Bukkit.broadcastMessage(Main.color("&eJustBru00 (The Developer of CommandPurchaseGUI) has joined the game."));		 
+	 }
+	}	
+
 
 	@EventHandler
 	public void InventoryClick(InventoryClickEvent e) {

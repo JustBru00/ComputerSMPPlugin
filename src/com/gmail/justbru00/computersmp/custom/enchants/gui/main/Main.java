@@ -3,6 +3,7 @@ package com.gmail.justbru00.computersmp.custom.enchants.gui.main;
 import java.util.ArrayList;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,13 +14,13 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseGUI;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
-import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.joinWatcher;
 
 public class Main extends JavaPlugin {
 
@@ -73,6 +74,35 @@ public class Main extends JavaPlugin {
 				return true;
 			}
 		}
+		if (command.getName().equalsIgnoreCase("withdraw")) {
+			if (sender instanceof Player) {
+				if (args.length == 1) {
+					Player player = (Player) sender;	
+					double withdrawAmount = 0;
+					try {
+					    withdrawAmount = Double.parseDouble(args[0]);
+					} catch(Exception e){
+						sender.sendMessage(Prefix + color("&cPlease put a number as the 1st argument."));
+						return true;
+					}
+					EconomyResponse r = econ.withdrawPlayer(player, withdrawAmount);
+		            if(r.transactionSuccess()) {
+		                player.sendMessage(String.format(Prefix + "Withdrew %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance)));
+		                PlayerInventory pi = player.getInventory();
+		                pi.addItem(createPaperItem(color("&4&l$" + args[0]), color("&7Right Click in the air to deposit this."), color("&8[&bComputerSMP&8]")));
+		                return true;		                
+		            } else {
+		                player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));	
+		                return true;
+		            }			
+				} else {
+					sender.sendMessage(Prefix + color("&cToo Many or Too Little Args. Please only type one number after /withdraw. Eg: /withdraw 50"));
+				}
+			} else {
+				sender.sendMessage(Prefix + color("&4Why Computerdude. Just Why.....  sender NOT instanceof Player"));
+				return true;
+			}
+		}
 		
 		return false;
 	}
@@ -112,7 +142,6 @@ public class Main extends JavaPlugin {
             return;
         }
 		getServer().getPluginManager().registerEvents(new GUIWatcher(), this);
-		getServer().getPluginManager().registerEvents(new joinWatcher(), this);
 		console.sendMessage(Prefix + "ENABLED!");
 
 	}

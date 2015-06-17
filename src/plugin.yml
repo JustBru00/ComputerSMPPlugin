@@ -1,6 +1,6 @@
 name: CommandPurchaseGUI
 main: com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main
-version: 1.1
+version: 1.2
 description: A Plugin
 author: Justin Brubaker
 depend: [Vault]
@@ -10,4 +10,5 @@ commands:
        description: I am too lazy for this description.     
  buycommand:
        description: I am too lazy for this description.
-  
+ withdraw:
+       description: I am too lazy for this description.
