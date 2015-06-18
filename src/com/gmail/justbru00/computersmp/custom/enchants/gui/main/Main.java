@@ -90,6 +90,7 @@ public class Main extends JavaPlugin {
 		                player.sendMessage(String.format(Prefix + "Withdrew %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance)));
 		                PlayerInventory pi = player.getInventory();
 		                pi.addItem(createPaperItem(color("&4&l$" + args[0]), color("&7Right Click in the air to deposit this."), color("&8[&bComputerSMP&8]")));
+		                
 		                return true;		                
 		            } else {
 		                player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));	

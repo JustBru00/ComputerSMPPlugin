@@ -15,7 +15,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.ItemStack;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
@@ -26,22 +26,29 @@ public class GUIWatcher implements Listener{
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent e){
-        Player player = e.getPlayer();
+        final Player player = e.getPlayer();
+        
+        ArrayList<String> testlore = new ArrayList<String>();
+    	testlore.add(Main.color("&7Right Click in the air to deposit this."));
+    	testlore.add(Main.color("&8[&bComputerSMP&8]"));
+    	
+    	
+    	if (e.getAction() != Action.RIGHT_CLICK_AIR) return;
+    	
+    	
+        if (player.getItemInHand().getItemMeta().getLore().equals(testlore)) {
             if(e.getAction() == Action.RIGHT_CLICK_AIR){
-                if(player.getItemInHand().getType() == Material.PAPER){
-                	
-                	ArrayList<String> testlore = new ArrayList<String>();
-                	testlore.add(Main.color("&7Right Click in the air to deposit this."));
-                	testlore.add(Main.color("&8[&bComputerSMP&8]"));
-                	
-                	if (player.getItemInHand().getItemMeta().getLore().equals(testlore)) {
+                if(player.getItemInHand().getType() == Material.PAPER){       	
                 		double depositamount = 0.0;
                 		String plainMoney = player.getItemInHand().getItemMeta().getDisplayName().replace(Main.color("&4&l$"), " ");
                 		ChatColor.stripColor(plainMoney);
                 		depositamount = Double.parseDouble(plainMoney);
                 		EconomyResponse r = Main.econ.depositPlayer(player, depositamount);
     		            if(r.transactionSuccess()) {
-    		                player.sendMessage(String.format(Prefix + "Deposited %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance)));   		               		                
+    		                player.sendMessage(String.format(Prefix + "Deposited %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance))); 
+    		                ItemStack inHand = player.getItemInHand();
+    		              int amountInHand = inHand.getAmount();
+    		              inHand.setAmount(--amountInHand);
     		            } else {
     		            	player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));    		             
     		            }			
