@@ -48,7 +48,11 @@ public class GUIWatcher implements Listener{
     		                player.sendMessage(String.format(Prefix + "Deposited %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance))); 
     		                ItemStack inHand = player.getItemInHand();
     		              int amountInHand = inHand.getAmount();
+    		              if (amountInHand == 1) {
+    		            	  player.setItemInHand(new ItemStack(Material.AIR));
+    		              } else {
     		              inHand.setAmount(--amountInHand);
+    		              }
     		            } else {
     		            	player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));    		             
     		            }			
@@ -60,21 +64,23 @@ public class GUIWatcher implements Listener{
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 	 if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {
-		 Bukkit.broadcastMessage(Main.color("&eJustBru00 (The Developer of CommandPurchaseGUI) has joined the game."));		 
+		 Bukkit.broadcastMessage(Main.color("&eJustBru00 (The Developer of &8[&bComputer&fSMP&8]&e) has joined the game."));		 
 	 }
 	}	
 
 
 	@EventHandler
 	public void InventoryClick(InventoryClickEvent e) {
-		Player p = (Player) e.getWhoClicked();
+		Player p = (Player) e.getWhoClicked();		
+		
 
 		if (e.getInventory().getTitle().contains(ChatColor.RED + "Money")) {
-			e.setCancelled(true);
-
-			if (e.getCurrentItem() == null) {
+			
+			
+			if (e.getCurrentItem() == null || e.getCurrentItem() == new ItemStack(Material.AIR)) {
 				return;
-			}
+			}		
+			e.setCancelled(true);	
 			
 			// Start Click Checks
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Main.color("&b/tpa"))) {

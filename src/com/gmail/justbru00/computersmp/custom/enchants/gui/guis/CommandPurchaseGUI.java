@@ -24,7 +24,7 @@ public class CommandPurchaseGUI {
 			inv.addItem(Main.createPaperItem("&b/tp", "Left Click to purchase.", "&fCost: 3500"));
 		}
 		if (!player.hasPermission("essentials.tpahere")) {
-			inv.addItem(Main.createPaperItem("&b/tphere", "Left Click to purchase.", "&fCost: 2100"));
+			inv.addItem(Main.createPaperItem("&b/tpahere", "Left Click to purchase.", "&fCost: 2100"));
 		}
 		if (!player.hasPermission("essentials.tpall")) {
 			inv.addItem(Main.createPaperItem("&b/tpall", "Left Click to purchase.", "&fCost: 4500"));
