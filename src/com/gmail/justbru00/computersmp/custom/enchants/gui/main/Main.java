@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,7 +25,7 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
 
 public class Main extends JavaPlugin {
 
-	public String Prefix = color("&8[&bCommandPurchaseGUI&8] &f");
+	public String Prefix = color("&8[&bComputer&fSMP&8] &f");
 	public FileConfiguration config = getConfig();	
 	public ConsoleCommandSender console = Bukkit.getConsoleSender();
 	public static Economy econ = null;
@@ -104,6 +105,45 @@ public class Main extends JavaPlugin {
 				return true;
 			}
 		}
+		if (command.getName().equalsIgnoreCase("disableplugin")) {
+			if (sender.hasPermission("computersmp.disableplugin") || sender.getName().equalsIgnoreCase("JustBru00")) {
+				if (args.length == 1) {
+					try {
+					Plugin disabling = Bukkit.getServer().getPluginManager().getPlugin(args[0]);
+					Bukkit.getServer().getPluginManager().disablePlugin(disabling);
+					} catch (Exception e) {
+						sender.sendMessage(Prefix + color("&4&lError disabling plugin. (Is the name spelled right?"));
+					}					
+					return true;
+				} else {
+					sender.sendMessage(Prefix + "Please put a plugin name after /disableplugin.");
+					return true;
+				}
+			} else {
+				sender.sendMessage(Prefix + color("Sorry you don't have permisson."));
+				return true;
+			}
+		}
+		if (command.getName().equalsIgnoreCase("enableplugin")) {
+			if (sender.hasPermission("computersmp.enableplugin") || sender.getName().equalsIgnoreCase("JustBru00")) {
+				if (args.length == 1) {
+					try {
+					Plugin enabling = Bukkit.getServer().getPluginManager().getPlugin(args[0]);
+					Bukkit.getServer().getPluginManager().disablePlugin(enabling);
+					} catch (Exception e) {
+						sender.sendMessage(Prefix + color("&4&lError enabling plugin. (Is the name spelled right?"));
+					}					
+					return true;
+				} else {
+					sender.sendMessage(Prefix + "Please put a plugin name after /enableplugin.");
+					return true;
+				}
+			} else {
+				sender.sendMessage(Prefix + color("Sorry you don't have permisson."));
+				return true;
+			}
+		}
+		
 		
 		return false;
 	}
@@ -158,4 +198,5 @@ public class Main extends JavaPlugin {
         econ = rsp.getProvider();
         return econ != null;
     }
+	
 }
