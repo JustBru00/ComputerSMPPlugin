@@ -22,7 +22,7 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 public class GUIWatcher implements Listener{
 	
 	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-	String Prefix = Main.color("&8[&bComputer&fSMP&8] &f");
+	String Prefix = Main.color("&8[&bEpic&fSMP&8] &f");
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent e){

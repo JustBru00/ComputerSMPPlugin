@@ -25,7 +25,7 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
 
 public class Main extends JavaPlugin {
 
-	public String Prefix = color("&8[&bComputer&fSMP&8] &f");
+	public String Prefix = color("&8[&bEpic&fSMP&8] &f");
 	public FileConfiguration config = getConfig();	
 	public ConsoleCommandSender console = Bukkit.getConsoleSender();
 	public static Economy econ = null;
@@ -33,8 +33,8 @@ public class Main extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 
-		if (command.getName().equalsIgnoreCase("commandpurchasegui")) {
-			if (sender.hasPermission("commandpurchasegui.commandpurchasegui")) {				
+		if (command.getName().equalsIgnoreCase("epicsmp")) {
+			if (sender.hasPermission("epicsmp.epicsmp")) {				
 				if (args.length == 1) {
 					if(args[0].equalsIgnoreCase("version")) {
 						sender.sendMessage(Prefix + color("&fVersion Message Here."));
@@ -44,12 +44,12 @@ public class Main extends JavaPlugin {
 						sender.sendMessage(Prefix + color("&fHelp Message Here."));
 						return true;
 					}else {
-						sender.sendMessage(Prefix + color("&4Please put help or version after /commandpurchasegui"));
+						sender.sendMessage(Prefix + color("&4Please put help or version after /epicsmp"));
 						return true;
 					}
 					
 				} else {
-				sender.sendMessage(Prefix + color("&4Please put help or version after /commandpurchasegui"));
+				sender.sendMessage(Prefix + color("&4Please put help or version after /epicsmp"));
 				return true;
 				}
 			} else {
@@ -71,7 +71,7 @@ public class Main extends JavaPlugin {
 				}
 				
 			} else {
-				sender.sendMessage(Prefix + color("&4SILLY COMPUTERDUDE :D"));
+				sender.sendMessage(Prefix + color("&4SILLY JustBru00 :D"));
 				return true;
 			}
 		}
@@ -83,7 +83,7 @@ public class Main extends JavaPlugin {
 					try {
 					    withdrawAmount = Double.parseDouble(args[0]);
 					} catch(Exception e){
-						sender.sendMessage(Prefix + color("&cPlease put a number as the 1st argument."));
+						sender.sendMessage(Prefix + color("&cPlease put a number."));
 						return true;
 					}
 					EconomyResponse r = econ.withdrawPlayer(player, withdrawAmount);
@@ -101,49 +101,10 @@ public class Main extends JavaPlugin {
 					sender.sendMessage(Prefix + color("&cToo Many or Too Little Args. Please only type one number after /withdraw. Eg: /withdraw 50"));
 				}
 			} else {
-				sender.sendMessage(Prefix + color("&4Why Computerdude. Just Why.....  sender NOT instanceof Player"));
+				sender.sendMessage(Prefix + color("&4Why JustBru00. Just Why.....  sender NOT instanceof Player"));
 				return true;
 			}
 		}
-		if (command.getName().equalsIgnoreCase("disableplugin")) {
-			if (sender.hasPermission("computersmp.disableplugin") || sender.getName().equalsIgnoreCase("JustBru00")) {
-				if (args.length == 1) {
-					try {
-					Plugin disabling = Bukkit.getServer().getPluginManager().getPlugin(args[0]);
-					Bukkit.getServer().getPluginManager().disablePlugin(disabling);
-					} catch (Exception e) {
-						sender.sendMessage(Prefix + color("&4&lError disabling plugin. (Is the name spelled right?"));
-					}					
-					return true;
-				} else {
-					sender.sendMessage(Prefix + "Please put a plugin name after /disableplugin.");
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("Sorry you don't have permisson."));
-				return true;
-			}
-		}
-		if (command.getName().equalsIgnoreCase("enableplugin")) {
-			if (sender.hasPermission("computersmp.enableplugin") || sender.getName().equalsIgnoreCase("JustBru00")) {
-				if (args.length == 1) {
-					try {
-					Plugin enabling = Bukkit.getServer().getPluginManager().getPlugin(args[0]);
-					Bukkit.getServer().getPluginManager().disablePlugin(enabling);
-					} catch (Exception e) {
-						sender.sendMessage(Prefix + color("&4&lError enabling plugin. (Is the name spelled right?"));
-					}					
-					return true;
-				} else {
-					sender.sendMessage(Prefix + "Please put a plugin name after /enableplugin.");
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("Sorry you don't have permisson."));
-				return true;
-			}
-		}
-		
 		
 		return false;
 	}

@@ -11,7 +11,7 @@ public class CommandPurchaseGUI {
 	public static Inventory commandPurchaseGUI(Player player, double money) {
 		if (player.isOp()) {
 		    Inventory inv = Bukkit.createInventory(null, 54, Main.color("&bYou are OP."));
-		    inv.setItem(22, Main.createPaperItem("&4You are OP", "Why do you need to buy commands.", "Just Why?"));
+		    inv.setItem(22, Main.createPaperItem("&4You are OP", "Why do you need to buy commands?", "Just Why?"));
 		    return inv;
 		} else {
 			Inventory inv = Bukkit.createInventory(null, 54, Main.color("&cMoney $" + money + "."));
