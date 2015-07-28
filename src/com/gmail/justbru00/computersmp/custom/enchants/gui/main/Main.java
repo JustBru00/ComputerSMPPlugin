@@ -16,99 +16,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.BuyCommand;
+import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.EpicSMP;
+import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.Withdraw;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseGUI;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
 
 public class Main extends JavaPlugin {
 
-	public String Prefix = color("&8[&bEpic&fSMP&8] &f");
+	public static String Prefix = color("&8[&bEpic&fSMP&8] &f");
 	public FileConfiguration config = getConfig();	
 	public ConsoleCommandSender console = Bukkit.getConsoleSender();
 	public static Economy econ = null;
 	
-	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-
-		if (command.getName().equalsIgnoreCase("epicsmp")) {
-			if (sender.hasPermission("epicsmp.epicsmp")) {				
-				if (args.length == 1) {
-					if(args[0].equalsIgnoreCase("version")) {
-						sender.sendMessage(Prefix + color("&fVersion Message Here."));
-						return true;
-					}
-					if(args[0].equalsIgnoreCase("help")) {
-						sender.sendMessage(Prefix + color("&fHelp Message Here."));
-						return true;
-					}else {
-						sender.sendMessage(Prefix + color("&4Please put help or version after /epicsmp"));
-						return true;
-					}
-					
-				} else {
-				sender.sendMessage(Prefix + color("&4Please put help or version after /epicsmp"));
-				return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4You don't have permission."));
-				return true;
-			}
-		}
-		if (command.getName().equalsIgnoreCase("buycommand")) {
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				double money = 100;
-				money = econ.getBalance(player);
-				if (money <= 99999) {
-					player.openInventory(CommandPurchaseGUI.commandPurchaseGUI(player, money));
-					return true;
-				} else {
-					player.openInventory(CommandPurchaseGUI.commandPurchaseGUI(player, 99999));
-					return true;
-				}
-				
-			} else {
-				sender.sendMessage(Prefix + color("&4SILLY JustBru00 :D"));
-				return true;
-			}
-		}
-		if (command.getName().equalsIgnoreCase("withdraw")) {
-			if (sender instanceof Player) {
-				if (args.length == 1) {
-					Player player = (Player) sender;	
-					double withdrawAmount = 0;
-					try {
-					    withdrawAmount = Double.parseDouble(args[0]);
-					} catch(Exception e){
-						sender.sendMessage(Prefix + color("&cPlease put a number."));
-						return true;
-					}
-					EconomyResponse r = econ.withdrawPlayer(player, withdrawAmount);
-		            if(r.transactionSuccess()) {
-		                player.sendMessage(String.format(Prefix + "Withdrew %s and now you have %s", Main.econ.format(r.amount), Main.econ.format(r.balance)));
-		                PlayerInventory pi = player.getInventory();
-		                pi.addItem(createPaperItem(color("&4&l$" + args[0]), color("&7Right Click in the air to deposit this."), color("&8[&bComputerSMP&8]")));
-		                
-		                return true;		                
-		            } else {
-		                player.sendMessage(String.format(Prefix + Main.color("&4An error occured: %s"), r.errorMessage));	
-		                return true;
-		            }			
-				} else {
-					sender.sendMessage(Prefix + color("&cToo Many or Too Little Args. Please only type one number after /withdraw. Eg: /withdraw 50"));
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4Why JustBru00. Just Why.....  sender NOT instanceof Player"));
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
+	
 	public static String color(String uncoloredstring) {
 		String colored = uncoloredstring.replace('_', ' ');
 		colored = ChatColor.translateAlternateColorCodes('&', colored);
@@ -144,6 +68,11 @@ public class Main extends JavaPlugin {
             return;
         }
 		getServer().getPluginManager().registerEvents(new GUIWatcher(), this);
+		
+		getCommand("withdraw").setExecutor(new Withdraw());
+		getCommand("epicsmp").setExecutor(new EpicSMP());
+		getCommand("buycommand").setExecutor(new BuyCommand());
+		
 		console.sendMessage(Prefix + "ENABLED!");
 
 	}

