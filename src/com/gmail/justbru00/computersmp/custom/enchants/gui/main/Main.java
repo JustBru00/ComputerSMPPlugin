@@ -3,18 +3,12 @@ package com.gmail.justbru00.computersmp.custom.enchants.gui.main;
 import java.util.ArrayList;
 
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,7 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.BuyCommand;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.EpicSMP;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters.Withdraw;
-import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseGUI;
 import com.gmail.justbru00.computersmp.custom.enchants.gui.listener.GUIWatcher;
 
 public class Main extends JavaPlugin {

