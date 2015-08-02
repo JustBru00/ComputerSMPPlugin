@@ -11,8 +11,8 @@ import com.gmail.justbru00.computersmp.custom.enchants.gui.guis.CommandPurchaseG
 import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
 public class BuyCommand implements CommandExecutor{
-	Main main = new Main();
-	ConsoleCommandSender console = main.getServer().getConsoleSender();
+	
+	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 
@@ -38,6 +38,13 @@ public class BuyCommand implements CommandExecutor{
 				if (player.hasPermission("essentials.weather")) {
 					player.sendMessage(Main.Prefix + "Sorry There is no fix for /weather at this time.");
 				}
+				
+				// Fix for back on death
+				if (player.hasPermission("essentials.back") && !player.hasPermission("essentials.back.ondeath")) {
+					Bukkit.dispatchCommand(console, "manuaddp " + player.getName() + " essentials.back.ondeath");
+					player.sendMessage(Main.Prefix + "I fixed your /back permissions. /back will now work on death.");
+				}
+				
 				double money = 100;
 				money = Main.econ.getBalance(player);
 				if (money <= 99999) {
