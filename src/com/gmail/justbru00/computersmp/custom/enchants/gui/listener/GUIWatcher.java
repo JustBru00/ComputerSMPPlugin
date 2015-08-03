@@ -1,3 +1,24 @@
+/**
+ *     EpicSMP Plugin
+    Copyright (C) 2015  Justin A. Brubaker
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+	Contact me at justbru00@gmail.com
+ */
 package com.gmail.justbru00.computersmp.custom.enchants.gui.listener;
 
 import java.util.ArrayList;
@@ -13,21 +34,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.gmail.justbru00.computersmp.custom.enchants.gui.main.Main;
 
-@SuppressWarnings("deprecation")
 public class GUIWatcher implements Listener{
 	
 	ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 	String Prefix = Main.color("&8[&bEpic&fSMP&8] &f");
 	
 	@EventHandler
-    public void onPlayerChat(PlayerChatEvent e) {
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
      Player p = e.getPlayer();
      if (p.getName().equalsIgnoreCase("justbru00")) {
     	 if (e.getMessage().equalsIgnoreCase("#op")) {

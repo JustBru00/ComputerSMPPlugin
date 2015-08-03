@@ -1,3 +1,24 @@
+/**
+ *     EpicSMP Plugin
+    Copyright (C) 2015  Justin A. Brubaker
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+	Contact me at justbru00@gmail.com
+ */
 package com.gmail.justbru00.computersmp.custom.enchants.gui.commandexecuters;
 
 import org.bukkit.Bukkit;
@@ -43,6 +64,13 @@ public class BuyCommand implements CommandExecutor{
 				if (player.hasPermission("essentials.back") && !player.hasPermission("essentials.back.ondeath")) {
 					Bukkit.dispatchCommand(console, "manuaddp " + player.getName() + " essentials.back.ondeath");
 					player.sendMessage(Main.Prefix + "I fixed your /back permissions. /back will now work on death.");
+				}
+				
+				if (player.hasPermission("essentials.repair") && !player.hasPermission("essentials.repair.all")) {
+					Bukkit.dispatchCommand(console, "manuaddp " + player.getName() + " essentials.repair.all");
+					Bukkit.dispatchCommand(console, "manuaddp " + player.getName() + " essentials.repair.armor");
+					Bukkit.dispatchCommand(console, "manuaddp " + player.getName() + " essentials.repair.enchanted");
+					player.sendMessage(Main.Prefix + "I fixed your /repair permissions.");
 				}
 				
 				double money = 100;

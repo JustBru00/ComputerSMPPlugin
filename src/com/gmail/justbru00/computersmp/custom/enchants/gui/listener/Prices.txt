@@ -1,3 +1,24 @@
+/**
+ *     EpicSMP Plugin
+    Copyright (C) 2015  Justin A. Brubaker
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+	Contact me at justbru00@gmail.com
+ */
 tpa - 2000, tp - 3500, tpahere - 2100, tpall - 4500, msg - 500, fix - 7500,
 back - 7000, bc - 1500, ci - 1500, craft - 5000, day - 3000, night - 3000,
 weather - 3500, feed - 7500, echest - 2000, fly - 8000, flyspeed - 2000,
